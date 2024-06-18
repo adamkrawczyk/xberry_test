@@ -102,6 +102,12 @@ docker run -it --rm \
 
 ## Run with docker-compose
 
+### Prerequisites
+
+If you don't have docker/docker-compose installed, you can install it following the official [documentation](https://docs.docker.com/compose/install/).
+
+### Build
+
 Use the docker-compose in the following way:
 
 ```bash
