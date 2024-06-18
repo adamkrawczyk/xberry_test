@@ -85,7 +85,9 @@ docker run -it --rm \
     xberry_test
 ```
 
-Or simply use the docker-compose:
+## Run with docker-compose
+
+Use the docker-compose in the following way:
 
 ```bash
 docker-compose up --build
@@ -104,7 +106,7 @@ Then run the docker-compose again:
 ```bash
 docker-compose up --build
 ```
-## Run from the docker
+### launch
 
 On pen the new terminal and run: 
 
@@ -116,6 +118,7 @@ ros2 launch xberry_test multi_sensor_launch.py float:=5 temperature:=4
 Open another terminal and run:
 
 ```bash
+xhost +local:docker
 docker exec -it xberry_test bash
 ros2 run xberry_test qt_subscriber_node
 ```
@@ -135,4 +138,15 @@ Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, 
 ```
 
 Exit the container and run `xhost +local:docker` and rerun the docker exec command.
+
+
+## Explanation
+
+![visualization2](./imgs/visualization2.png)
+
+The boxes represents the nodes, and the lines topics. 
+
+Above the boxes you can see the number of the messages received by the subscriber.
+
+The data below the boxes are the newest data received by the subscriber.
 
