@@ -52,7 +52,17 @@ ros2 launch xberry_test multi_sensor_launch.py float:=5 temperature:=5
 ros2 service call /set_publish_frequency xberry_test/srv/SetFrequency "{frequency: 2.0}"  # this will set all the publishers the frequency to 2.0
 ```
 
-// TODO: services to change the data
+Change the temperature data: 
+
+```bash
+ros2 service call /set_temperature_data xberry_test/srv/SetTemperature "{temperature: 20.0, variance: 2.0}"
+```
+
+Change the float data: 
+
+```bash
+ros2 service call /set_float_data xberry_test/srv/SetFloat "data: 32434.0"
+```
 
 ## Run visualization
 
@@ -63,6 +73,11 @@ ros2 run xberry_test qt_subscriber_node
 result:
 
 ![visualization](./imgs/visualization.png)
+
+
+After running the reconfigure service, you can see the changes in the visualization.
+
+![visualization3](./imgs/visualization3.png)
 
 
 ## Docker

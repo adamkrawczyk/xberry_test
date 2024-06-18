@@ -14,13 +14,11 @@ public:
     current_message_.variance = 0.1;
 
     // Service to change the temperature data
-    this->create_service<xberry_test::srv::SetTemperature>(
+    data_service_ = this->create_service<xberry_test::srv::SetTemperature>(
         "set_temperature_data",
         [this](const std::shared_ptr<rmw_request_id_t> request_header,
-               const std::shared_ptr<xberry_test::srv::SetTemperature::Request>
-                   request,
-               std::shared_ptr<xberry_test::srv::SetTemperature::Response>
-                   response) {
+               const std::shared_ptr<xberry_test::srv::SetTemperature::Request> request,
+               std::shared_ptr<xberry_test::srv::SetTemperature::Response> response) {
           (void)request_header;
           sensor_msgs::msg::Temperature temp_msg;
           temp_msg.temperature = request->temperature;
@@ -52,11 +50,9 @@ int main(int argc, char *argv[]) {
   int timer_ms = randomTimer();
   auto frequency = 1.0 / timer_ms * 1000;
 
-  RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Publishing frequency: %f Hz",
-              frequency);
+  RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Publishing frequency: %f Hz", frequency);
 
-  auto node = std::make_shared<TemperaturePublisher>(
-      "temperature_topic", std::chrono::milliseconds(timer_ms));
+  auto node = std::make_shared<TemperaturePublisher>("temperature_topic", std::chrono::milliseconds(timer_ms));
 
   rclcpp::spin(node);
   rclcpp::shutdown();
